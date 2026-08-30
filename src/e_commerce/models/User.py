@@ -10,3 +10,4 @@ class User(Base):
     email: Mapped[str] = mapped_column(unique=True)
 
     order: Mapped[list["Order"]] = relationship("Order", back_populates="user")
+    reviews: Mapped["Review"] = relationship("Review", back_populates="user")

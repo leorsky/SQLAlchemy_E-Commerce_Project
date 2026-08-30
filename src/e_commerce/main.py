@@ -3,6 +3,7 @@ from e_commerce.models.Product import Product
 from e_commerce.models.Category import Category
 from e_commerce.models.Order import Order
 from e_commerce.models.OrderItem import OrderItem
+from e_commerce.models.Review import Review
 from e_commerce.database.connection import SessionLocal
 from e_commerce.database.connection import Base, engine
 from sqlalchemy import select
@@ -73,43 +74,50 @@ item3 = OrderItem(
     quantity=1,
 )
 
+review1 = Review(
+    user=user2,
+    product=product2,
+    rating=5,
+    comment="Excellent laptop, very fast and reliable!",
+)
+
 Base.metadata.create_all(engine)
 
 with SessionLocal() as session:
     try:
-        session.add_all([
-            user1,
-            user2,
-            category1,
-            category2,
-            product1,
-            product2,
-            product3,
-            order1,
-            order2,
-            item1,
-            item2,
-            item3,
-        ])
-        session.commit()
-
-        full_orm = [
-            user1,
-            user2,
-            category1,
-            category2,
-            product1,
-            product2,
-            product3,
-            order1,
-            order2,
-            item1,
-            item2,
-            item3,
-        ]
-
-        for el in full_orm:
-            session.refresh(el)
+        # session.add_all([
+        #     user1,
+        #     user2,
+        #     category1,
+        #     category2,
+        #     product1,
+        #     product2,
+        #     product3,
+        #     order1,
+        #     order2,
+        #     item1,
+        #     item2,
+        #     item3,
+        # ])
+        # session.commit()
+        #
+        # full_orm = [
+        #     user1,
+        #     user2,
+        #     category1,
+        #     category2,
+        #     product1,
+        #     product2,
+        #     product3,
+        #     order1,
+        #     order2,
+        #     item1,
+        #     item2,
+        #     item3,
+        # ]
+        #
+        # for el in full_orm:
+        #     session.refresh(el)
 
         statement1 = select(Product).where(Product.id == 1)
         result1 = session.execute(statement1)
