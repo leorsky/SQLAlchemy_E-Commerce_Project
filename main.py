@@ -72,3 +72,5 @@ item3 = OrderItem(
     product=product2,
     quantity=1,
 )
+
+Base.metadata.create_all(engine)
